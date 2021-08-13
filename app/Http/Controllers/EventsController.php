@@ -181,11 +181,13 @@ class EventsController extends BaseController
      */
 
     public function getFutureEventsWithWorkshops() {
-        $result=Event::with(['workshop'=>function($query) {
-            $query->where('start', '>',date('Y-m-d H:i:s'));
-            $query->where('start', '<',date('Y-m-d H:i:s'));
+	
+        $result=Event::with('workshops')->whereHas('workshops',function($query) {
+			
+
+            $query->where('start', '>=',date('Y-m-d 00:00:00'));//->where('end', 'or',date('Y-m-d 00:00:00'));
             
-        }])->get();
+        })->get();
 		        return \Illuminate\Support\Facades\Response::json($result,200)->header('Content-Type', "application/json");
 
     }
