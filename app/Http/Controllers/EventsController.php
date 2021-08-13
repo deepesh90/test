@@ -180,6 +180,10 @@ class EventsController extends BaseController
     ```
      */
 
+    public function warmupevents() {
+				        return \Illuminate\Support\Facades\Response::json([],200)->header('Content-Type', "application/json");
+
+	}
     public function getFutureEventsWithWorkshops() {
 	
         $result=Event::with('workshops')->whereHas('workshops',function($query) {
