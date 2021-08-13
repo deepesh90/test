@@ -181,7 +181,8 @@ class EventsController extends BaseController
      */
 
     public function warmupevents() {
-				        return \Illuminate\Support\Facades\Response::json([],200)->header('Content-Type', "application/json");
+		$result=Event::all();
+				        return \Illuminate\Support\Facades\Response::json($result,200)->header('Content-Type', "application/json");
 
 	}
     public function getFutureEventsWithWorkshops() {
